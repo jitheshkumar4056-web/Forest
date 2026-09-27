@@ -39,6 +39,22 @@ npm run dev        # http://localhost:5173
 npm run build      # type-check + production build
 ```
 
+## Getting it on your phone (no coding needed)
+
+The app is a **web app** — there is no Play Store / App Store file. "Installing" it means putting it on your home screen, after which it opens full-screen with its own icon, like a normal app.
+
+**Easiest way — free permanent link (about 5 minutes):**
+
+1. Download **`LEX-Kerala-app.zip`** from the workspace and double-click it — you get a folder called `LEX-Kerala`.
+2. Go to **netlify.com** → sign up free (email is enough).
+3. On the Sites page, **drag the `LEX-Kerala` folder** onto the page.
+4. After ~30 seconds it gives you a link like `lex-kerala-xyz.netlify.app`.
+5. Open that link **on your phone** → tap **Share → Add to Home Screen**.
+
+Done — the icon (gold scales on charcoal) appears on your home screen, the app opens full-screen, and it even works without internet once opened once, because it ships with offline support (a service worker + web app manifest are included in the build).
+
+> Note: your GitHub repository is private, so GitHub Pages hosting isn't available for it on a free plan — Netlify (above) doesn't mind private repos and needs no configuration.
+
 ## Tech
 
 - React 18 + TypeScript + Vite

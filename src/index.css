@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: "Source Serif 4 Variable", "Source Serif 4", "Georgia", "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* Charcoal / near-black surfaces with a faint green cast */
+  --color-ink-950: #070908;
+  --color-ink-900: #090b0a;
+  --color-ink-850: #0c0f0d;
+  --color-ink-800: #121614;
+  --color-ink-750: #161b18;
+  --color-ink-700: #1a201c;
+  --color-ink-600: #232a25;
+  --color-ink-500: #2d352e;
+
+  /* Deep, muted forest green — primary accent */
+  --color-forest-950: #0f1a13;
+  --color-forest-900: #14231a;
+  --color-forest-800: #1b3123;
+  --color-forest-700: #234030;
+  --color-forest-600: #2e5a42;
+  --color-forest-500: #3a6c50;
+  --color-forest-400: #679a7c;
+  --color-forest-300: #8fb9a1;
+  --color-forest-200: #b7d4c3;
+
+  /* Restrained gold / amber — reserved for key legal information */
+  --color-gold-700: #6e5a2a;
+  --color-gold-600: #93773a;
+  --color-gold-500: #b3954b;
+  --color-gold-400: #c8a75f;
+  --color-gold-300: #dcc287;
+  --color-gold-200: #ecdcae;
+
+  /* Warm off-white text ramp */
+  --color-cream-50: #f4f0e5;
+  --color-cream-100: #ece7d9;
+  --color-cream-200: #dcd7c8;
+  --color-cream-300: #c8c4b4;
+  --color-cream-400: #b0ab9a;
+  --color-cream-500: #989486;
+  --color-cream-600: #7d7a6f;
+  --color-cream-700: #63615a;
+
+  /* Status */
+  --color-verdict-good: #7fae8b;
+  --color-verdict-warn: #c8a75f;
+  --color-verdict-bad: #b0736a;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ink-950 text-cream-200 font-sans antialiased;
+  font-feature-settings: "ss01", "cv05";
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #2e5a42;
+  color: #f4f0e5;
+}
+
+/* Slim, unobtrusive scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #232a25 transparent;
+}
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #232a25;
+  border-radius: 3px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #7d7a6f;
+}
+
+:focus-visible {
+  outline: 2px solid #3a6c50;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ------- app shell ------- */
+.app-frame {
+  position: relative;
+  min-height: 100dvh;
+  max-width: 30rem;
+  margin-inline: auto;
+  background: #0c0f0d;
+  border-inline: 1px solid #171d18;
+  overflow-anchor: none;
+}
+
+@media (min-width: 641px) {
+  body {
+    background:
+      radial-gradient(1200px 600px at 50% -10%, rgba(46, 90, 66, 0.07), transparent 60%),
+      #070908;
+  }
+}
+
+/* ------- motion ------- */
+@keyframes screen-in {
+  from {
+    opacity: 0;
+    transform: translateX(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes screen-in-soft {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes para-flash {
+  0% {
+    background-color: rgba(200, 167, 95, 0.22);
+    box-shadow: inset 3px 0 0 #c8a75f;
+  }
+  100% {
+    background-color: rgba(200, 167, 95, 0.05);
+    box-shadow: inset 3px 0 0 rgba(200, 167, 95, 0.35);
+  }
+}
+
+.anim-screen {
+  animation: screen-in 240ms cubic-bezier(0.22, 0.8, 0.3, 1) both;
+}
+.anim-soft {
+  animation: screen-in-soft 280ms cubic-bezier(0.22, 0.8, 0.3, 1) both;
+}
+.anim-toast {
+  animation: toast-in 200ms cubic-bezier(0.22, 0.8, 0.3, 1) both;
+}
+.para-flash {
+  animation: para-flash 3200ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-screen,
+  .anim-soft,
+  .anim-toast,
+  .para-flash {
+    animation: none;
+  }
+}
+
+/* pressed feedback for cards / buttons */
+.press {
+  transition:
+    transform 120ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+.press:active {
+  transform: scale(0.985);
+}
+
+/* quiet horizontal chip rail */
+.chip-rail {
+  scrollbar-width: none;
+}
+.chip-rail::-webkit-scrollbar {
+  display: none;
+}
+
+/* serif drop cap for judgment opening — a quiet nod to law reports */
+.law-report-cite {
+  font-family: var(--font-mono);
+  letter-spacing: 0.01em;
+}
